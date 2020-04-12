@@ -1,21 +1,30 @@
 {
-  "name": "app",
-  "version": "1.0.0",
+  "name": "@restqa/smtp-moxy",
+  "version": "0.0.1",
   "description": "A light mail proxy to support your End to End automation test",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon -r dotenv/config index.js",
-    "lint": "standard", 
-    "lint:fix": "standard --fix", 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "test": "jest",
+    "test:watch": "jest --watch --coverage",
+    "test:coverage": "jest --coverage"
   },
+  "keywords": [
+    "smtp",
+    "email",
+    "mock",
+    "server",
+    "qa",
+    "restqa"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/restqa/smtp-moxy.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "olivier rodomond",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/restqa/smtp-moxy/issues"
@@ -24,7 +33,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "mailparser": "^2.7.7",
-    "memory-cache": "^0.2.0",
     "moment": "^2.24.0",
     "nodemailer": "^6.4.6",
     "smtp-server": "^3.6.0"
