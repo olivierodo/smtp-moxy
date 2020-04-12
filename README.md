@@ -98,8 +98,7 @@ The result
             "name": "Restqa Labs"
           }
         ],
-        "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Restqa Labs</span> &lt;<a href=\"mailto:team@restqa.io\" class=\"mp_address_email\">team@restqa.io</a>&gt;</span>",
-        "text": "Restqa Labs <team@restqa.io>"
+        ...
       },
       "to": {
         "value": [
@@ -112,17 +111,7 @@ The result
         "text": "supafly@test-sample.io"
       },
       "subject": "smtp-moxy test",
-      "message-id": "<5e92d6d3.kR84j1XFv3p0R79V%team@restqa.io>",
-      "user-agent": "Heirloom mailx 12.5 7/5/10",
-      "mime-version": "1.0",
-      "content-type": {
-        "value": "text/plain",
-        "params": {
-          "charset": "us-ascii"
-        }
-      },
-      "content-transfer-encoding": "7bit"
-   
+    },
     "text": "Backup executado com sucesso\n",
     "textAsHtml": "<p>Backup executado com sucesso</p>",
     "subject": "smtp-moxy test",
@@ -134,7 +123,6 @@ The result
           "name": ""
         }
       ],
-      "html": "<span class=\"mp_address_group\"><a href=\"mailto:supafly@test-sample.io\" class=\"mp_address_email\">supafly@test-sample.io</a></span>",
       "text": "supafly@test-sample.io"
     },
     "from": {
@@ -143,11 +131,8 @@ The result
           "address": "team@restqa.io",
           "name": "Restqa Labs"
         }
-      ],
-      "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Restqa Labs</span> &lt;<a href=\"mailto:team@restqa.io\" class=\"mp_address_email\">team@restqa.io</a>&gt;</span>",
-      "text": "Restqa Labs <team@restqa.io>"
+      ]
     },
-    "messageId": "<5e92d6d3.kR84j1XFv3p0R79V%team@restqa.io>",
     "html": false
   }
 ]
@@ -157,6 +142,19 @@ The result
 ### Kubernetes Way
 
 
+Let say you want to deploy moxy in the tests namespace you will just need to run :
 
+kubectl apply -f https://raw.githubusercontent.com/restqa/smtp-moxy/master/kubernetes-manifest.yml -n tests
 
+The definition file includes :
+
+* config map
+* deployment ( 1 replicas)
+* service
+*
+You can still get insipire from our example definition file : [kubernetes-manifest.yml](./kubernetes-manifest.yml)
+
+## License
+
+[MIT](./LICENSE) License
 
