@@ -122,45 +122,7 @@ The result
         }
       },
       "content-transfer-encoding": "7bit"
-    },
-    "headerLines": [
-      {
-        "key": "date",
-        "line": "Date: Sun, 12 Apr 2020 08:52:35 +0000"
-      },
-      {
-        "key": "from",
-        "line": "From: Restqa Labs <team@restqa.io>"
-      },
-      {
-        "key": "to",
-        "line": "To: supafly@test-sample.io"
-      },
-      {
-        "key": "subject",
-        "line": "Subject: smtp-moxy test"
-      },
-      {
-        "key": "message-id",
-        "line": "Message-ID: <5e92d6d3.kR84j1XFv3p0R79V%team@restqa.io>"
-      },
-      {
-        "key": "user-agent",
-        "line": "User-Agent: Heirloom mailx 12.5 7/5/10"
-      },
-      {
-        "key": "mime-version",
-        "line": "MIME-Version: 1.0"
-      },
-      {
-        "key": "content-type",
-        "line": "Content-Type: text/plain; charset=us-ascii"
-      },
-      {
-        "key": "content-transfer-encoding",
-        "line": "Content-Transfer-Encoding: 7bit"
-      }
-    ],
+   
     "text": "Backup executado com sucesso\n",
     "textAsHtml": "<p>Backup executado com sucesso</p>",
     "subject": "smtp-moxy test",
