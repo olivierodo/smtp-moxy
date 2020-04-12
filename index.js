@@ -14,26 +14,26 @@ const {
 } = process.env
 
 const config = {
-  storage: new Storage({ttl: CACHE_TTL}),
+  storage: new Storage({ ttl: CACHE_TTL }),
   ttl: 60,
   http: {
-    port: HTTP_PORT || 8080,
+    port: HTTP_PORT || 8080
   },
   smtp: {
     mockRecepientDomain: MOCK_DOMAINE_NAME || 'restqa.io',
     forwardTo: {
       host: FORWARD_SMTP_SERVER_HOST,
       port: FORWARD_SMTP_SERVER_PORT,
-      secure: (FORWARD_SMTP_SERVER_SECURE && Boolean(FORWARD_SMTP_SERVER_SECURE)) || false,
+      secure: (FORWARD_SMTP_SERVER_SECURE && Boolean(FORWARD_SMTP_SERVER_SECURE)) || false
     },
-    port: SMTP_PORT || 465,
+    port: SMTP_PORT || 465
   }
 }
 
-let smtpServer = new Smtp(config)
-let httpServer = new Http(config)
+const smtpServer = new Smtp(config)
+const httpServer = new Http(config)
 
-config.storage.put('oli@test.com', {foo: 'bar'})
+config.storage.put('oli@test.com', { foo: 'bar' })
 
 http
   .createServer(httpServer)
@@ -43,4 +43,3 @@ http
       console.log(`> The server smtp is running on the port ${config.smtp.port}`)
     })
   })
-
