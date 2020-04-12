@@ -144,7 +144,9 @@ The result
 
 Let say you want to deploy moxy in the tests namespace you will just need to run :
 
+```sh
 kubectl apply -f https://raw.githubusercontent.com/restqa/smtp-moxy/master/kubernetes-manifest.yml -n tests
+```
 
 The definition file includes :
 
