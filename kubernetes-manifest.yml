@@ -1,0 +1,107 @@
+---
+# CONFIGMAP
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: smtp-moxy-restqa
+  labels:
+    app: mock_smtp_proxy
+    type: testing
+data:
+  CACHE_TTL: "6000"
+  FORWARD_SMTP_SERVER_HOST: "smtp.gmail.com"
+  FORWARD_SMTP_SERVER_PORT: "587"
+  FORWARD_SMTP_SERVER_SECURE: "false"
+  MOCK_DOMAINE_NAME: "restqa-test.io"
+  HTTP_PORT: 8080 &HTTP_PORT
+  SMTP_PORT: 465 &SMTP_PORT
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smtp-moxy-restqa
+  labels:
+    app: mock_smtp_proxy
+    type: testing
+spec:
+  selector:
+    matchLabels:
+      app: mock_smtp_proxy
+      type: testing
+  template:
+    metadata:
+      labels:
+        app: mock_smtp_proxy
+        type: testing
+      name: moxy-restqa
+    spec:
+      containers:
+      - name: moxy
+        imagePullPolicy: Always
+        image: restqa/smtp-moxy:latest
+        envFrom:
+         - configMapRef:
+             name: smtp-moxy-restqa
+        ports:
+        - containerPort: *HTTP_PORT
+          protocol: TCP
+        - containerPort: *SMTP_PORT
+          protocol: TCP
+        resources:
+          limits:
+             cpu: 256m
+             memory: 100Mi
+          requests:
+             cpu: 100m
+             memory: 100Mi
+        readinessProbe:
+          httpGet:
+            path: /
+            port: *HTTP_PORT
+          failureThreshold: 10
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 60
+        livenessProbe:
+          httpGet:
+            path: /
+            port: *HTTP_PORT
+          failureThreshold: 10
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 60
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp-moxy-restqa
+  labels:
+    app: mock_smtp_proxy
+    type: testing
+spec:
+  selector:
+    app: mock_smtp_proxy
+  ports:
+    - port: *HTTP_PORT
+      targetPort: *HTTP_PORT
+      protocol: TCP
+      name: http
+    - port: *SMTP_PORT
+      targetPort: *SMTP_PORT
+      protocol: TCP
+      name: smpt
+  #type: NodePort
+  type: LoadBalancer
+
